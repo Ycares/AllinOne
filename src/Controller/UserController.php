@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 class UserController extends AbstractController
 {
@@ -92,5 +94,23 @@ class UserController extends AbstractController
         $em->remove($user);
         $em->flush();
         return $this->redirectToRoute('app_user_list');
+    }
+
+    #[Route('/users', name: 'app_users')]
+    public function listUsers(EntityManagerInterface $em): Response
+    {
+        $users = $em->getRepository(User::class)->findAll();
+
+        return $this->render('user/list.html.twig', [
+            'users' => $users,
+        ]);
+    }
+    
+    #[Route('/user/{id}', name:'app_user_profile')]
+    public function showUser(int $id ,EntityManagerInterface $em): Response{
+      $user = $em->getRepository(User::class)->find($id);
+      return $this->render('user/profile.html.twig', [
+        'user' => $user
+      ]);
     }
 }
