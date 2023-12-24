@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ConpetenceController!{% endblock %}
+
+{% block body %}
+ <h1>Liste des compétences</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Compétence</th>
+                <th>Catégorie</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for competence in competences %}
+                <tr>
+                    <td>{{ competence.id }}</td>
+                    <td>{{ competence.competence }}</td>
+                    <td>{{ competence.categorie.categories }}</td> 
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
