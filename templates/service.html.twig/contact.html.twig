@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<form method="post">
+		{{ form_start(contactForm) }}
+		<div class="mb-3 col-sm-10">
+				{{ form_row(contactForm.nom, {'attr': {'class': 'form-control'}}) }}
+			</div>
+			<div class="mb-3 col-sm-10">
+				{{ form_row(contactForm.email, {'attr': {'class': 'form-control'}}) }}
+			</div>
+			<div class="mb-3 col-sm-10">
+				{{ form_row(contactForm.sujet, {'attr': {'class': 'form-control'}}) }}
+			</div>
+			<div class="mb-3 col-sm-10">
+				{{ form_row(contactForm.message, {'attr': {'class': 'form-control'}}) }}
+			</div>
+		
+         <div class="mb-3">
+		<button type="submit" class="btn btn-primary">Soumettre</button>
+        </div>
+		{{ form_end(contactForm) }}
+	</form>
+{% endblock %}
