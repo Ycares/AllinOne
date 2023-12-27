@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+{% endblock %}
+
+{% block body %}
+
+	{% for competence in competences %}
+		<div class="block">
+			<div class="container h-100">
+				<div class="row align-middle">
+					<div class="col-md-6 col-lg-4 column">
+						<div class="card gr-1">
+							<div class="txt">
+								<h1>BRANDING AND
+								</br>
+								CORPORATE DESIGN</h1>
+							<p>{{ competence.categorie.categories }}</p>
+						</div>
+						<a href="{{ path('competence_one_competence', { 'competences': competence.id }) }}">more</a>
+						<div class="ico-card">
+							<i class="fa fa-rebel"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		{% endfor %}
+	</tbody>
+</table>{% endblock %}

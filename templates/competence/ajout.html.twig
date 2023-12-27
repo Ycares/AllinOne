@@ -1,26 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ConpetenceController!{% endblock %}
-
 {% block body %}
- <h1>Liste des compétences</h1>
+	<h1>Competence</h1>
+	{{form_start(competenceForm)}}
+	{{ form_row(competenceForm.competence) }}
+	{{form_row(competenceForm.categorie)}}
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Compétence</th>
-                <th>Catégorie</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for competence in competences %}
-                <tr>
-                    <td>{{ competence.id }}</td>
-                    <td>{{ competence.competence }}</td>
-                    <td>{{ competence.categorie.categories }}</td> 
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+	<button type="submit">Enregistrer</button>
+
+	{{form_end(competenceForm)}}
+
 {% endblock %}

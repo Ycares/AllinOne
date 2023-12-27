@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  <h1>Renseigner les informations</h1>
-         {{form_start(userForm)}}
-        {{ form_row(userForm.nom) }}
-        {{ form_row(userForm.prenom) }}
-        {{ form_row(userForm.email) }}
-        {{ form_row(userForm.bio) }}
-        {{ form_row(userForm.competences) }}
-        <button type="submit">Enregistrer</button>
-  {{form_end(userForm)}}
-   
+	<h1>Renseigner les informations</h1>
+	{{form_start(userForm)}}
+	{{ form_row(userForm.nom) }}
+	{{ form_row(userForm.prenom) }}
+	{{ form_row(userForm.email) }}
+	{{ form_row(userForm.bio) }}
+	{{ form_row(userForm.competences) }}
+	<button type="submit">Enregistrer</button>
+	{{form_end(userForm)}}
+
 
 {% endblock %}

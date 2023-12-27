@@ -1,19 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ConpetenceController!{% endblock %}
+{% block title %}Hello ConpetenceController!
+{% endblock %}
 
 {% block body %}
-  <h1>Détails de l'utilisateur</h1>
-    <p>Nom : {{ user.nom }}</p>
-    <p>Prénom : {{ user.prenom() }}</p>
-    <p>Email : {{ user.email() }}</p>
+	<h1>Détails de l'utilisateur</h1>
+	<p>Nom :
+		{{ user.nom }}</p>
+	<p>Prénom :
+		{{ user.prenom() }}</p>
+	<p>Email :
+		{{ user.email() }}</p>
 
-    <h2>Compétences :</h2>
-    <ul>
-        {% for competence in competences %}
-            <li>{{ competence.competence() }} (La catégorie : {{ competence.categorie().getCategories() }})</li>
-        {% endfor %}
-    </ul>
-        </tbody>
-    </table>
-{% endblock %}
+	<h2>Compétences :</h2>
+	<ul>
+		{% for competence in competences %}
+			<li>{{ competence.competence() }}
+				(La catégorie :
+				{{ competence.categorie().getCategories() }})</li>
+		{% endfor %}
+	</ul>
+</tbody></table>{% endblock %}
