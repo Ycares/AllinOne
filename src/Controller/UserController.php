@@ -19,6 +19,9 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/user', name: 'user_')]
 class UserController extends AbstractController
 {
+    public function __construct(
+        private readonly FileManager $fileManager
+    ){}
 
     #[Route('/update/{user}', name: 'update')]
     public function updat(User $user,Request $request, EntityManagerInterface $em): Response
@@ -29,7 +32,18 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+            $picture = $form->get('photo_profil')->getData();
+
+             if($picture != null){
+                $filename = $this->fileManager->upload($picture);
+                $user->setPhotoProfil($filename);
+            }
+            $cv = $form->get('cv')->getData();
+
+             if($cv != null){
+                $filename = $this->fileManager->download($cv);
+                $user->setCv($filename);
+            }
             $em->persist($user);
             $em->flush();
            

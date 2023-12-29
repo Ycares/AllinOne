@@ -4,6 +4,7 @@ namespace App\Form;
 
 
 use App\Entity\Competences;
+use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -13,6 +14,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Image;
+use Symfony\UX\Dropzone\Form\DropzoneType;
 
 class UserUpdateType extends AbstractType
 {
@@ -31,15 +35,32 @@ class UserUpdateType extends AbstractType
                     
                 ]
             ])
-            // ->add('photo_profil')
-            // ->add('cv')
+            ->add('photo_profil',DropzoneType::class, [
+                'label'=> 'Photo de profil',
+                'mapped' => false,
+                'constraints' =>[
+                    new Image(maxWidth:250, maxHeight:250)
+                ]
+            ])
+            ->add('cv', DropzoneType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k', // Taille maximale du fichier (1 Mo)
+                        'mimeTypes' => [
+                            'application/pdf', // Autoriser uniquement les fichiers PDF
+                        ],
+                        'mimeTypesMessage' => 'Veuillez télécharger un fichier PDF valide',
+                    ])
+                ]
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'data_class' => User::class,
         ]);
     }
 }
