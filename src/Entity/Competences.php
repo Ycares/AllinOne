@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\CompetencesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: CompetencesRepository::class)]
 class Competences
@@ -19,6 +21,16 @@ class Competences
     #[ORM\ManyToOne(targetEntity: CategoriesCompetence::class)]
     #[ORM\JoinColumn(nullable: false)]
     private $categorie;
+  
+     
+     #[ORM\ManyToMany(targetEntity:User::class)] 
+     
+    private $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -48,4 +60,13 @@ class Competences
 
         return $this;
     }
+    
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
 }

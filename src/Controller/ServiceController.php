@@ -25,7 +25,8 @@ class ServiceController extends AbstractController
     public function contact (Request $request): Response
     {
         $initialData = [
-            'nom' => 'Eli',
+            'nom' => 'Alio',
+            'prenom' => 'Eli',
             'email' => 'eli@gamil.com',
             'message' => 'salut!!'
         ];

@@ -1,17 +1,54 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<h1>Renseigner les informations</h1>
-	{{form_start(userForm)}}
-	{{ form_row(userForm.nom) }}
-	{{ form_row(userForm.prenom) }}
-	{{ form_row(userForm.email) }}
-	{{ form_row(userForm.bio) }}
-	{{ form_row(userForm.competences) }}
-	{{ form_row(userForm.photo_profil) }}
-	{{ form_row(userForm.cv) }}
-	<button type="submit">Enregistrer</button>
-	{{form_end(userForm)}}
-
-
+    <h1>Renseigner les informations</h1>
+    {{ form_start(userForm, {'attr': {'class': 'form-horizontal'}}) }}
+    <div class="form-group">
+        {{ form_label(userForm.nom, 'Nom', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        <div class="col-sm-10">
+            {{ form_widget(userForm.nom, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(userForm.prenom, 'Prénom', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        <div class="col-sm-10">
+            {{ form_widget(userForm.prenom, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(userForm.email, 'Email', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        <div class="col-sm-10">
+            {{ form_widget(userForm.email, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(userForm.bio, 'Bio', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        <div class="col-sm-10">
+            {{ form_widget(userForm.bio, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(userForm.competences, 'Compétences', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        <div class="col-sm-10">
+            {{ form_widget(userForm.competences, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(userForm.photo_profil, 'Photo de profil', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        <div class="col-sm-10">
+            {{ form_widget(userForm.photo_profil, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(userForm.cv, 'CV', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        <div class="col-sm-10">
+            {{ form_widget(userForm.cv, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </div>
+    </div>
+    {{ form_end(userForm) }}
 {% endblock %}

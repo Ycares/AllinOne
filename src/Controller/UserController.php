@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\CompetenceType;
 use App\Form\UserUpdateType;
+use App\Repository\CompetencesRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
@@ -67,7 +68,16 @@ class UserController extends AbstractController
     public function listprofil(UserRepository $userRepository): Response
     {
         $users = $userRepository->findAll();
+        
         return $this->render('user/list.html.twig', ['users' => $users]);
     }
+
+    #[Route('/list', name: 'list_users')]
+public function listusers(CompetencesRepository $competencesRepository): Response
+{
+    $competences = $competencesRepository->findAll();
+    
+    return $this->render('user/test.html.twig', ['competences' => $competences]);
+}
 
 }

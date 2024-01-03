@@ -21,6 +21,14 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+    public function findAllWithCompetences()
+    {
+        return $this->createQueryBuilder('u')
+            ->leftJoin('u.competences', 'c')
+            ->addSelect('c')
+            ->getQuery()
+            ->getResult();
+    }
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

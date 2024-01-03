@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/cat.css') }}">
+{% endblock %}
+
+{% block body %}
+	<main>
+		{# <div class="a">
+		        <div class="row justify-content-sm-center">
+		            {% for user in users %}
+		                <div class="col-sm-4">
+		                    <div class="card" style="width: 18rem;">
+		                        <div class="card-body">
+		                            <h5 class="card-title">{{ user.user.nom }}</h5>
+		                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		                            <p class="card-text"><small class="text-muted">400 $</small></p>
+		                        </div>
+		                    </div>
+		                </div>
+		            {% endfor %}
+		        </div> #}
+
+		<ul class="nav nav-pills mb-3 justify-content-sm-center mb-4 px-3" id="myTabs" role="tablist">
+			{% for competence in competences %}
+				<li class="nav-item" role="presentation">
+					<a class="nav-link {% if loop.first %}active{% endif %}" id="competence-{{ competence.id }}-tab" data-bs-toggle="pill" href="#competence-{{ competence.id }}" role="tab" aria-controls="competence-{{ competence.id }}" aria-selected="{% if loop.first %}true{% else %}false{% endif %}">
+						<img src="" width="40px" alt="">
+						{{ competence.competence }}
+						<span class="badge bg-danger rounded-pill">{{ competence.users|length }}</span>
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+
+		<div class="tab-content" id="myTabContent">
+			{% for competence in competences %}
+				<div class="tab-pane fade {% if loop.first %}show active{% endif %}" id="competence-{{ competence.id }}" role="tabpanel" aria-labelledby="competence-{{ competence.id }}-tab">
+					<div class="row justify-content-sm-center">
+						{% for user in competence.users %}
+							<div class="col-sm-4">
+								<div class="card" style="width: 18rem;">
+                                {# <div class="card-body"> #}
+									<div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+										<div class="advisor_thumb">
+											{% if user.getPhotoProfil() is not empty %}
+												<img src="{{ asset('profile/' ~ user.getPhotoProfil()) }}" alt="{{ user.nom }} Photo">
+											{% else %}
+												<img src="{{ asset('defaut/default.png') }}" alt="Default Photo">
+											{% endif %}
+											<div class="social-info">
+												<p>{{user.prenom}}</p>
+											</div>
+										</div>
+                                        
+										<div class="single_advisor_details_info">
+											<h6>{{ user.bio }}</h6>
+											<h5>{{ user.nom }}</h5>
+											<a class="btn btn-primary" href="{{ path('user_profil', { 'user': user.id }) }}">go</a>
+										</div>
+									</div>
+								{# </div> #}
+								</div>
+							</div>
+							<!-- Ajoutez d'autres cartes pour chaque compétence de cet utilisateur -->
+						{% endfor %}
+
+					</div>
+				</div>
+
+			{% endfor %}
+		</div>
+
+	</main>
+
+	<footer>
+		<div>
+			<p>&copy; 2023 Mon Site Web</p>
+		</div>
+	</footer>
+    
+{% endblock %}
