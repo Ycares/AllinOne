@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/cat.css') }}">
+{% endblock %}
+
+{% block body %}
+
+	{# {% for competence in competences %} #}
+		<div class="block">
+			<div class="container h-100">
+				<div class="row align-middle">
+					<div class="col-md-6 col-lg-4 column">
+						<div class="card gr-1">
+							<div class="txt">
+								<h1>BRANDING AND
+								</br>
+								CORPORATE DESIGN</h1>
+							{# <p>{{ competence.categorie.categories }}</p> #}
+						</div>
+						{# <a href="{{ path('competence_one_competence', { 'competences': competence.id }) }}">more</a> #}
+						<div class="ico-card">
+							<i class="fa fa-rebel"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		
+	</tbody>
+<main>
+    <div class="a">
+        <ul class="nav nav-pills mb-3 justify-content-sm-center mb-4 px-3" id="myTabs" role="tablist">
+            {% for competence in competences %}
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link {% if loop.index == 1 %}active{% endif %}" id="{{ competence.categorie.categories|replace({' ': '_', '~': '_'}) }}-tab" data-bs-toggle="pill" href="#{{ competence.categorie.categories|replace({' ': '_', '~': '_'}) }}" role="tab" aria-controls="{{ competence.categorie.categories|replace({' ': '_', '~': '_'}) }}" aria-selected="{% if loop.index == 1 %}true{% else %}false{% endif %}">
+                        <img src="/AllinOne/images/icones/java.png" width="40px" alt=""> {{ competence.categorie.categories }}
+                        <span class="badge bg-danger rounded-pill">4</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+            {% for competence in competences %}
+                <div class="tab-pane fade {% if loop.index == 1 %}show active{% endif %}" id="{{ competence.categorie.categories|replace({' ': '_', '~': '_'}) }}" role="tabpanel" aria-labelledby="{{ competence.categorie.categories|replace({' ': '_', '~': '_'}) }}-tab">
+                    <div class="row justify-content-sm-center">
+                        <div class="col-sm-4">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ competence.competence }}</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <p class="card-text"><small class="text-muted">400 $</small></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Ajoutez d'autres cartes pour chaque compétence dans cette catégorie -->
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+    
+        <footer>
+            <div>
+                <p>&copy; 2023 Mon Site Web</p>
+            </div>
+    </div>
+   
+    </footer>
+
+{% endblock %}
