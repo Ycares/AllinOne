@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <h1>Competence</h1>
+         {{form_start(competenceForm)}}
+        {{ form_row(competenceForm.competence) }}
+        {{form_row(competenceForm.categorie)}}
+       
+        <button type="submit">Enregistrer</button>
+  
+       {{form_end(competenceForm)}}
+
+{% endblock %}

@@ -21,6 +21,15 @@ class CompetencesRepository extends ServiceEntityRepository
         parent::__construct($registry, Competences::class);
     }
 
+    public function findUsersByCompetence(Competences $competence)
+{
+    return $this->createQueryBuilder('c')
+        ->leftJoin('c.users', 'u')
+        ->where('c.id = :competenceId')
+        ->setParameter('competenceId', $competence->getId())
+        ->getQuery()
+        ->getResult();
+}
 //    /**
 //     * @return Competences[] Returns an array of Competences objects
 //     */
