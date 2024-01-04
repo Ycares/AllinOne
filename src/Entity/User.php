@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use App\Entity\Competences;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -50,6 +51,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         inverseJoinColumns: [new ORM\JoinColumn(name: "competences_id", referencedColumnName: "id")]
     )]
     private $competences;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: '0')]
+    private ?string $salaire = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $metier = null;
 
     public function __construct()
     {
@@ -215,6 +222,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeCompetence(Competences $competence): self
     {
         $this->competences->removeElement($competence);
+
+        return $this;
+    }
+
+    public function getSalaire(): ?string
+    {
+        return $this->salaire;
+    }
+
+    public function setSalaire(string $salaire): static
+    {
+        $this->salaire = $salaire;
+
+        return $this;
+    }
+
+    public function getMetier(): ?string
+    {
+        return $this->metier;
+    }
+
+    public function setMetier(string $metier): static
+    {
+        $this->metier = $metier;
 
         return $this;
     }

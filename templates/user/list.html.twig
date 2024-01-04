@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    {{ parent() }}
+  
     <link rel="stylesheet" href="{{ asset('css/list.css') }}">
 {% endblock %}
 
@@ -17,7 +17,7 @@
                             <img src="{{ asset('defaut/default.png') }}" alt="Default Photo">
                         {% endif %}
                         <div class="social-info">
-                           <p>{{user.bio}}</p>
+                           <p>{{user.salaire}}</p>
                         </div>
                     </div>
                     <div class="single_advisor_details_info">
