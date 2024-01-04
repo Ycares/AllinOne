@@ -7,7 +7,7 @@
 
 {% block body %}
 
-    <section class="vh-100">
+    {# <section class="vh-100">
       <div class="container-fluid h-custom">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-md-9 col-lg-6 col-xl-5">
@@ -49,18 +49,16 @@
 
               <div class="text-center text-lg-start mt-4 pt-2">
                 <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">S'inscrire</button>
-                <p class="small fw-bold mt-2 pt-1 mb-0">Vous avez déjà un compte ? <a href={{path('app_user_login')}} class="link-danger">Se connecter</a></p>
+                <p class="small fw-bold mt-2 pt-1 mb-0">Vous avez déjà un compte ? <a href={{path('user_login')}} class="link-danger">Se connecter</a></p>
               </div>
 
             </form>
           </div>
         </div>
       </div>
-    </section>
-{% endblock %}
-
-
-    {# {{ form_start(userForm) }}
+    </section> #}
+    {{ form_start(userForm) }}
     {{form_rest(userForm)}}
     <button type="submit" class="btn btn-primary">Submit</button>
-    {{form_end(userForm)}} #}
+    {{form_end(userForm)}}
+{% endblock %}

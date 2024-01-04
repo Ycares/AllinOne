@@ -26,7 +26,7 @@ class UserController extends AbstractController
         private readonly FileManager $fileManager
     ){}
     #[Route('/register', name: 'register')]
-   
+
     public function register(Request $request, UserPasswordHasherInterface $hasher, EntityManagerInterface $em): Response{
       $user = new User();
       $form = $this->createForm(UserType::class, $user);
@@ -50,9 +50,9 @@ class UserController extends AbstractController
         'last_username'=> $auth->getLastUsername(),
         'error' => $auth->getLastAuthenticationError()
       ]);
-       
+
     }
-   
+
 
     #[Route('/logout', name:'logout')]
     public function logout():Response{
@@ -65,7 +65,7 @@ class UserController extends AbstractController
             'controller_name' => 'UserController',
         ]);
     }
-    #[Route('/user/list', name:'list')]
+    #[Route('/list', name:'list')]
     public function list(UserRepository $rep) {
         $users = $rep->findAll();
         return $this->render('User/list.html.twig', [
@@ -108,10 +108,10 @@ class UserController extends AbstractController
 
 
     #[Route('/update/{user}', name: 'update')]
-    
+
     public function updat(User $user,Request $request, EntityManagerInterface $em): Response
     {
-        
+
 
         $form = $this->createForm(UserEditType::class, $user);
 
@@ -142,7 +142,7 @@ class UserController extends AbstractController
             ]);
     }
 
-    #[Route('/profil/{user}', name: 'user_profil')]
+    #[Route('/profil/{user}', name: 'profil')]
     public function profil(User $user): Response
     {
         $competences = $user->getCompetences();
@@ -151,13 +151,13 @@ class UserController extends AbstractController
     ]);
     }
     #[Route('/compte/{user}', name: 'compte')]
-   
+
 
     #[Route('/list', name: 'list_users')]
     public function listusers(CompetencesRepository $competencesRepository): Response
     {
         $competences = $competencesRepository->findAll();
-    
+
         return $this->render('user/test.html.twig', ['competences' => $competences]);
     }
 
