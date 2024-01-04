@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Competences;
 use App\Entity\User;
+use App\Service\CompetencesTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -33,8 +34,7 @@ class UserEditType extends AbstractType
             'entry_options' => [
                 'class' => Competences::class,
                 'choice_label' => 'Competence',
-                
-            ]
+            ],
         ])
         ->add('photo_profil',DropzoneType::class, [
             'label'=> 'Photo de profil',
