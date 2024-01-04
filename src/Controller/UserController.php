@@ -6,17 +6,25 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Form\UserUpdateType;
+use App\Repository\CompetencesRepository;
+use App\Service\FileManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+#[Route('/user', name: 'user_')]
 class UserController extends AbstractController
 {
-    #[Route('/register', name: 'app_user_register')]
+    public function __construct(
+        private readonly FileManager $fileManager
+    ){}
+    #[Route('/register', name: 'register')]
+   
     public function register(Request $request, UserPasswordHasherInterface $hasher, EntityManagerInterface $em): Response{
       $user = new User();
       $form = $this->createForm(UserType::class, $user);
@@ -27,22 +35,24 @@ class UserController extends AbstractController
         $em->persist($user);
         $em->flush();
 
-        return $this->redirectToRoute('app_user_login');
+        return $this->redirectToRoute('user_login');
       }
       return $this->render('user/register.html.twig', [
         'userForm' => $form]);
   }
 
-    #[Route('/login', name:'app_user_login')]
+    #[Route('/login', name:'login')]
     public function login(AuthenticationUtils $auth): Response{
+
       return $this->render('user/login.html.twig', [
         'last_username'=> $auth->getLastUsername(),
         'error' => $auth->getLastAuthenticationError()
       ]);
-
+       
     }
+   
 
-    #[Route('/logout', name:'')]
+    #[Route('/logout', name:'logout')]
     public function logout():Response{
       throw new \Exception('This code should not be reached, did you forget to add logout path in security.yaml ?');
     }
@@ -96,14 +106,28 @@ class UserController extends AbstractController
 
 
     #[Route('/update/{user}', name: 'update')]
+    #[IsGranted('editOrDelete','user')]
     public function updat(User $user,Request $request, EntityManagerInterface $em): Response
     {
 
-        $form = $this->createForm(UserUpdateType::class, $user);
+        $form = $this->createForm(UserType::class, $user);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $picture = $form->get('photo_profil')->getData();
+
+            if($picture != null){
+               $filename = $this->fileManager->upload($picture);
+               $user->setPhotoProfil($filename);
+           }
+           $cv = $form->get('cv')->getData();
+
+            if($cv != null){
+               $filename = $this->fileManager->download($cv);
+               $user->setCv($filename);
+           }
 
             $em->persist($user);
             $em->flush();
@@ -123,12 +147,15 @@ class UserController extends AbstractController
         'competences' => $competences
     ]);
     }
+    #[Route('/compte/{user}', name: 'compte')]
+   
 
-    #[Route('/listprofil', name: 'list_profil')]
-    public function listprofil(UserRepository $userRepository): Response
+    #[Route('/list', name: 'list_users')]
+    public function listusers(CompetencesRepository $competencesRepository): Response
     {
-        $users = $userRepository->findAll();
-        return $this->render('user/list.html.twig', ['users' => $users]);
+        $competences = $competencesRepository->findAll();
+    
+        return $this->render('user/test.html.twig', ['competences' => $competences]);
     }
 
 

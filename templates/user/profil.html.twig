@@ -121,12 +121,14 @@
                       Bay Area, San Francisco, CA
                     </div>
                   </div>
+                  {% if is_granted('ROLE_USER') %}
                   <hr>
                   <div class="row">
                     <div class="col-sm-12">
                       <a class="btn btn-info " target="__blank" href=" {{ path('user_update', { 'user': user.id }) }}">Edit</a>
                     </div>
                   </div>
+                  {% endif %}
                 </div>
               </div>
 {% endblock %}

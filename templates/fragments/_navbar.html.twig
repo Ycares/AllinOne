@@ -13,12 +13,18 @@
 				<li class="nav-item mx-0 mx-lg-1">
 					<a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ path('service_contact') }}">Contact</a>
 				</li>
+				{% if not is_granted('ROLE_USER') %}
 				<li class="nav-item mx-0 mx-lg-1">
-					<a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">Incription</a>
+					<a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ path("user_register") }}">Incription</a>
 				</li>
 				<li class="nav-item mx-0 mx-lg-1">
-					<a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">Connexion</a>
+					<a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ path("user_login") }}">Connexion</a>
 				</li>
+				{% else %}
+				<li class="nav-item mx-0 mx-lg-1">
+					<a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ path("user_logout") }}">Deconnexion</a>
+				</li>
+				{% endif %}
 			</ul>
 		</div>
 	</div>
