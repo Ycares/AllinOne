@@ -1,10 +1,66 @@
+
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Register</h1>
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+{% endblock %}
 
-    {{ form_start(userForm) }}
+{% block body %}
+
+    <section class="vh-100">
+      <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-md-9 col-lg-6 col-xl-5">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+            class="img-fluid" alt="Sample image">
+          </div>
+          <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+            <form method="post">
+
+              <!-- Nom input -->
+              <div class="form-outline mb-4">
+                <input type="text" id="nom" class="form-control form-control-lg" placeholder="Votre nom" name="nom" />
+                <label class="form-label" for="nom"></label>
+              </div>
+
+              <!-- Prénom input -->
+              <div class="form-outline mb-4">
+                <input type="text" id="prenom" class="form-control form-control-lg" placeholder="Votre prénom" name="prenom" />
+                <label class="form-label" for="prenom"></label>
+              </div>
+
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                <input type="email" id="email" class="form-control form-control-lg" placeholder="Adresse email valide" name="email" />
+                <label class="form-label" for="email"></label>
+              </div>
+
+              <!-- Password input -->
+              <div class="form-outline mb-4">
+                <input type="password" id="password" class="form-control form-control-lg" placeholder="Mot de passe" name="password" />
+                <label class="form-label" for="password"></label>
+              </div>
+
+              <!-- Métier input -->
+              <div class="form-outline mb-4">
+                <input type="text" id="metier" class="form-control form-control-lg" placeholder="Votre métier" name="metier" />
+                <label class="form-label" for="metier"></label>
+              </div>
+
+              <div class="text-center text-lg-start mt-4 pt-2">
+                <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">S'inscrire</button>
+                <p class="small fw-bold mt-2 pt-1 mb-0">Vous avez déjà un compte ? <a href={{path('app_user_login')}} class="link-danger">Se connecter</a></p>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}
+
+
+    {# {{ form_start(userForm) }}
     {{form_rest(userForm)}}
     <button type="submit" class="btn btn-primary">Submit</button>
-    {{form_end(userForm)}}
-{% endblock %}
+    {{form_end(userForm)}} #}
