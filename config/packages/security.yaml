@@ -20,10 +20,12 @@ security:
             form_login:
               login_path: user_login
               check_path: user_login
-              default_target_path: user_profil
+              success_handler: App\Security\LoginSuccessHandler 
 
             logout:
               path: user_logout
+              target: user_login
+              
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

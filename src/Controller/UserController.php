@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserEditType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Form\UserUpdateType;
@@ -10,6 +11,7 @@ use App\Repository\CompetencesRepository;
 use App\Service\FileManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -106,11 +108,12 @@ class UserController extends AbstractController
 
 
     #[Route('/update/{user}', name: 'update')]
-    #[IsGranted('editOrDelete','user')]
+    
     public function updat(User $user,Request $request, EntityManagerInterface $em): Response
     {
+        
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserEditType::class, $user);
 
         $form->handleRequest($request);
 
