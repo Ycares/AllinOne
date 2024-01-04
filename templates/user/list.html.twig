@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
+
     <link rel="stylesheet" href="{{ asset('css/list.css') }}">
 {% endblock %}
 
 {% block body %}
+
 <header class="py-5">
   <div class="container px-lg-5">
       <div class="p-4 p-lg-5 bg-light rounded-3 text-center banniere">
@@ -31,6 +33,7 @@
                             </div>
                             <h3 class="pt-3 text-dark">{{ user.nom }}</h3>
                             <p class="text-secondary">{{ user.bio }}</p>
+                            <p>{{user.salaire}}</p>
                             <div class="social-links">
                                 <ul>
                                     <li><a href="#"><i class="bi bi-facebook"></i></a></li>
