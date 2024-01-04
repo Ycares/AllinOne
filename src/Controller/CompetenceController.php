@@ -70,4 +70,6 @@ class CompetenceController extends AbstractController
             'competenceForm' => $form
         ]);
     }
+
+    
 }
