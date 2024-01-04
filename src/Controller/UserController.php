@@ -53,7 +53,7 @@ class UserController extends AbstractController
             'controller_name' => 'UserController',
         ]);
     }
-    #[Route('/admin/user/list')]
+    #[Route('/user/list', name:'list')]
     public function list(UserRepository $rep) {
         $users = $rep->findAll();
         return $this->render('User/list.html.twig', [
@@ -115,7 +115,7 @@ class UserController extends AbstractController
             ]);
     }
 
-    #[Route('/profil/{user}', name: 'profil')]
+    #[Route('/profil/{user}', name: 'user_profil')]
     public function profil(User $user): Response
     {
         $competences = $user->getCompetences();

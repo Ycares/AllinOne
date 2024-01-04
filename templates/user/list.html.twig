@@ -1,33 +1,52 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/list.css') }}">
 {% endblock %}
 
 {% block body %}
-    <div class="carte">
-        {% for user in users %}
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                    <div class="advisor_thumb">
-                        {% if user.getPhotoProfil() is not empty %}
-                            <img src="{{ asset('profile/' ~ user.getPhotoProfil()) }}" alt="{{ user.nom }} Photo">
-                        {% else %}
-                            <img src="{{ asset('defaut/default.png') }}" alt="Default Photo">
-                        {% endif %}
-                        <div class="social-info">
-                           <p>{{user.bio}}</p>
+<header class="py-5">
+  <div class="container px-lg-5">
+      <div class="p-4 p-lg-5 bg-light rounded-3 text-center banniere">
+          <div class="m-4 m-lg-5">
+              <h1 class="fs-3 fw-bold">Trouvez le programmeur, qui rendra réel vos projet !</h1>
+              <p class="fs-4"></p>
+          </div>
+      </div>
+  </div>
+</header>
+<section class="pt-4">
+  <div class="container px-lg-5">
+      <div class="row gx-lg-5">
+            <div class="row">
+                {% for user in users %}
+                    <div class="col-12 col-sm-6 col-lg-3 mb-4">
+                        <div class="profile-card text-center shadow bg-light p-4 my-5 rounded-3">
+                            <div class="profile-photo shadow">
+                                {% if user.getPhotoProfil() is not empty %}
+                                    <img src="{{ asset('profile/' ~ user.getPhotoProfil()) }}" alt="{{ user.nom }} Photo" class="img-fluid">
+                                {% else %}
+                                    <img src="{{ asset('defaut/default.png') }}" alt="Default Photo" class="img-fluid">
+                                {% endif %}
+                            </div>
+                            <h3 class="pt-3 text-dark">{{ user.nom }}</h3>
+                            <p class="text-secondary">{{ user.bio }}</p>
+                            <div class="social-links">
+                                <ul>
+                                    <li><a href="#"><i class="bi bi-facebook"></i></a></li>
+                                    <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+                                    <li><a href="#"><i class="bi bi-instagram"></i></a></li>
+                                    <li><a href="#"><i class="bi bi-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                            <a class="btn btn-success" href="{{ path('user_profil', { 'user': user.id }) }}">Voir +</a>
                         </div>
                     </div>
-                    <div class="single_advisor_details_info">
-                        <h6>{{ user.nom }}</h6>
-                        <a class="btn btn-primary" href="{{ path('user_profil', { 'user': user.id }) }}">go</a>
-                    </div>
-                </div>
-                </div>
+                    {% if loop.index % 3 == 0 %}<div class="w-100"></div>{% endif %}
+                {% endfor %}
             </div>
-            {% if loop.index % 3 == 0 %}</div><div class="carte">{% endif %}
-        {% endfor %}
-    </div>
+          </div>
+        </div>
+      </div>
+    </section>
 {% endblock %}
