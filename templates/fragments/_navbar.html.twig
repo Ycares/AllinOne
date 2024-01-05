@@ -1,11 +1,9 @@
-
-=======
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
   <!-- Container wrapper -->
   <div class="container">
     <!-- Navbar brand -->
-    <div> All In One </div>
+    
 
     <!-- Toggle button -->
     <button
@@ -25,18 +23,27 @@
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href={{path('home')}}>Dashboard</a>
+          <a class="nav-link" href={{path('home')}}> All In One</a>
         </li>
       </ul>
       <!-- Left links -->
 
       <div class="d-flex align-items-center">
-        <button data-mdb-ripple-init type="button" class="btn btn-outline-success px-3 me-2">
+      	{% if not is_granted('ROLE_USER') %}
+        <a data-mdb-ripple-init type="button" class="btn btn-outline-success px-3 me-2" href="{{ path("user_login") }}">
           Se connecter
-        </button>
-        <button data-mdb-ripple-init type="button" class="btn btn-success me-3">
+        </a>
+        <a data-mdb-ripple-init type="button" class="btn btn-success me-3" href="{{ path("user_register") }}">
           S'inscrire
-        </button>
+        </a>
+        {% else %}
+        <a data-mdb-ripple-init type="button" class="btn btn-success me-3"href="{{ path("user_profil", { 'user': app.user.id }) }}">
+          Profil
+        </a>
+        <a data-mdb-ripple-init type="button" class="btn btn-danger me-3" href="{{ path("user_logout") }}">
+          Deconnexion
+        </a>
+        {% endif %}
       </div>
     </div>
     <!-- Collapsible wrapper -->

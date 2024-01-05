@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Ajouter des informations</h1>
+    {{ form_start(userForm, {'attr': {'class': 'form-horizontal position-relative py-2 px-4'}}) }}
+   
+    
+    <div class="form-group">
+        {{ form_label(userForm.bio, 'Bio', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(userForm.bio, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <br>
+        <div class="col-sm-6">
+            {{ form_widget(userForm.competences, ) }}
+        </div>
+    <br>
+    <div class="form-group">
+        {{ form_label(userForm.metier, 'Metier', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(userForm.metier, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <br>
+    <div class="form-group">
+        {{ form_label(userForm.salaire, 'Salaire', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(userForm.salaire, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <br>
+    <div class="form-group">
+        {{ form_label(userForm.photo_profil, 'Photo de profil', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(userForm.photo_profil, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <br>
+    <div class="form-group">
+        {{ form_label(userForm.cv, 'CV', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(userForm.cv, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <br>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-6">
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </div>
+    </div>
+    {{ form_end(userForm) }}
+    
+{% endblock %}

@@ -25,10 +25,10 @@ class ServiceController extends AbstractController
     public function contact (Request $request): Response
     {
         $initialData = [
-            'nom' => 'Alio',
-            'prenom' => 'Eli',
-            'email' => 'eli@gamil.com',
-            'message' => 'salut!!'
+            'nom' => '',
+            'prenom' => '',
+            'email' => '',
+            'message' => ''
         ];
         
         $form = $this->createForm(ContactType::class, $initialData);

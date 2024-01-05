@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserAddType;
 use App\Form\UserEditType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -65,13 +66,13 @@ class UserController extends AbstractController
             'controller_name' => 'UserController',
         ]);
     }
-    #[Route('/list', name:'list')]
-    public function list(UserRepository $rep) {
-        $users = $rep->findAll();
-        return $this->render('User/list.html.twig', [
-            'users' => $users
-        ]);
-    }
+    // #[Route('/list', name:'list')]
+    // public function list(UserRepository $rep) {
+    //     $users = $rep->findAll();
+    //     return $this->render('User/list.html.twig', [
+    //         'users' => $users
+    //     ]);
+    // }
 
     #[Route('/admin/user/update/{user}')]
     public function update(User $user, Request $request, EntityManagerInterface $em) {
@@ -111,8 +112,7 @@ class UserController extends AbstractController
 
     public function updat(User $user,Request $request, EntityManagerInterface $em): Response
     {
-
-
+        
         $form = $this->createForm(UserEditType::class, $user);
 
         $form->handleRequest($request);
@@ -141,6 +141,40 @@ class UserController extends AbstractController
                 'userForm' => $form
             ]);
     }
+    #[Route('/add/{user}', name: 'add')]
+
+    public function add(User $user,Request $request, EntityManagerInterface $em): Response
+    {
+        $user = new User();
+        $form = $this->createForm(UserAddType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $picture = $form->get('photo_profil')->getData();
+
+            if($picture != null){
+               $filename = $this->fileManager->upload($picture);
+               $user->setPhotoProfil($filename);
+           }
+           $cv = $form->get('cv')->getData();
+
+            if($cv != null){
+               $filename = $this->fileManager->download($cv);
+               $user->setCv($filename);
+           }
+
+            $em->persist($user);
+            $em->flush();
+
+        }
+            return $this->render('user/ajouter.html.twig', [
+
+                'userForm' => $form
+            ]);
+    }
+
 
     #[Route('/profil/{user}', name: 'profil')]
     public function profil(User $user): Response

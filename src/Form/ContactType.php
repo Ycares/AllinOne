@@ -20,8 +20,8 @@ class ContactType extends AbstractType
         ->add('email', EmailType::class)
         ->add('sujet', ChoiceType::class,[
             'choices'=> [
-                "Deamande d'information"=> "Demande d'information",
-                "Etre rapeler"=> "Etre rapele"
+                "Demande d'information"=> "Demande d'information",
+                "Etre rappelé"=> "Etre rappelé"
             ]
             ])
         ->add('message', TextareaType::class)
