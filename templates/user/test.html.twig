@@ -5,18 +5,6 @@
 
 {% block body %}
 	<main>
-		<ul class="nav nav-pills mb-3 justify-content-sm-center mb-4 px-3" id="myTabs" role="tablist">
-			{% for competence in competences %}
-				<li class="nav-item" role="presentation">
-					<a class="nav-link {% if loop.first %}active{% endif %}" id="competence-{{ competence.id }}-tab" data-bs-toggle="pill" href="#competence-{{ competence.id }}" role="tab" aria-controls="competence-{{ competence.id }}" aria-selected="{% if loop.first %}true{% else %}false{% endif %}">
-						<img src="" width="40px" alt="">
-						{{ competence.competence }}
-						<span class="badge bg-danger rounded-pill">{{ competence.users|length }}</span>
-					</a>
-				</li>
-			{% endfor %}
-		</ul>
-
 		<div class="tab-content" id="myTabContent">
 			{% for competence in competences %}
 				<div class="tab-pane fade {% if loop.first %}show active{% endif %}" id="competence-{{ competence.id }}" role="tabpanel" aria-labelledby="competence-{{ competence.id }}-tab">
@@ -36,7 +24,7 @@
 												<p>{{user.prenom}}</p>
 											</div>
 										</div>
-                                        
+
 										<div class="single_advisor_details_info">
 											<h6>{{ user.bio }}</h6>
 											<h5>{{ user.salaire}}  € </h5>
@@ -62,5 +50,5 @@
 			<p>&copy; 2023 Mon Site Web</p>
 		</div>
 	</footer>
-    
+
 {% endblock %}
