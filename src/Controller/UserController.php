@@ -66,6 +66,7 @@ class UserController extends AbstractController
             'controller_name' => 'UserController',
         ]);
     }
+
     // #[Route('/list', name:'list')]
     // public function list(UserRepository $rep) {
     //     $users = $rep->findAll();
@@ -73,6 +74,8 @@ class UserController extends AbstractController
     //         'users' => $users
     //     ]);
     // }
+
+
 
     #[Route('/admin/user/update/{user}')]
     public function update(User $user, Request $request, EntityManagerInterface $em) {
@@ -192,7 +195,7 @@ class UserController extends AbstractController
     {
         $competences = $competencesRepository->findAll();
 
-        return $this->render('user/test.html.twig', ['competences' => $competences]);
+        return $this->render('user/list.html.twig', ['competences' => $competences]);
     }
 
 
