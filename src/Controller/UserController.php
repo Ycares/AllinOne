@@ -66,10 +66,12 @@ class UserController extends AbstractController
         ]);
     }
     #[Route('/list', name:'list')]
-    public function list(UserRepository $rep) {
+    public function list(UserRepository $rep, CompetencesRepository $competencesRepository) {
         $users = $rep->findAll();
+        $competences = $competencesRepository->findAll();
         return $this->render('User/list.html.twig', [
-            'users' => $users
+            'users' => $users,
+            'competences' => $competences
         ]);
     }
 
@@ -158,7 +160,7 @@ class UserController extends AbstractController
     {
         $competences = $competencesRepository->findAll();
 
-        return $this->render('user/test.html.twig', ['competences' => $competences]);
+        return $this->render('user/list.html.twig', ['competences' => $competences]);
     }
 
 
